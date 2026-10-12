@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Engineering portfolio of Parker Mace, mechanical engineering student at Tufts University.">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Parker Mace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a test report — left-aligned sheet, name-led hero, projects as report entries with a meta rail */
+:root {
+  --paper: #ECEFF1;
+  --surface: #F7F8F9;
+  --ink: #13202B;
+  --muted: #56646F;
+  --rule: #C6CFD6;
+  --accent: #2446B5;
+  --signal: #D99A0B;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sheet: 72rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0D1319; --surface: #141C24; --ink: #E3E8EC; --muted: #93A0AB;
+    --rule: #28343E; --accent: #8FA8F4; --signal: #F0C24A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0D1319; --surface: #141C24; --ink: #E3E8EC; --muted: #93A0AB;
+  --rule: #28343E; --accent: #8FA8F4; --signal: #F0C24A; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
+  padding-inline: 1.25rem; padding-block: 0;
+  -webkit-font-smoothing: antialiased;
+}
+.sheet { max-width: var(--sheet); margin-inline: auto; }
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+p { margin: 0; }
+.label {
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* Top bar */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--paper); border-bottom: 1px solid var(--rule);
+  margin-inline: -1.25rem; padding-inline: 1.25rem;
+}
+.topbar .sheet { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.8rem; }
+.mark { font-family: var(--display); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+.nav { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+.nav a { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.nav a:hover { color: var(--ink); }
+
+/* Hero */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  padding-block: clamp(2.5rem, 7vw, 5rem) 2.5rem;
+}
+.hero-text { min-width: 0; display: grid; gap: 1.4rem; }
+.hero h1 {
+  font-size: clamp(3.4rem, 9vw, 6.6rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.045em;
+}
+.hero h1 span { display: block; color: var(--accent); }
+.lede { max-width: 34rem; font-size: 1.15rem; color: var(--ink); }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.8rem 1.1rem; border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper);
+  text-decoration: none; cursor: pointer; border-radius: 2px;
+}
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+/* Spec strip */
+.specs {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+  border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(3rem, 8vw, 5.5rem);
+}
+.spec { padding: 0.9rem 1rem 1rem 0; display: grid; gap: 0.25rem; min-width: 0; }
+.spec + .spec { padding-left: 1rem; border-left: 1px solid var(--rule); }
+.spec .v { font-weight: 600; font-size: 0.98rem; line-height: 1.35; }
+
+/* Sections */
+section { padding-bottom: clamp(3rem, 8vw, 5.5rem); scroll-margin-top: 4rem; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+.sec-head h2 { font-size: clamp(2rem, 4.5vw, 2.9rem); font-weight: 700; }
+
+/* Project entries */
+.projects { display: grid; gap: 1.25rem; }
+.project {
+  display: grid; grid-template-columns: 13rem minmax(0, 1fr);
+  background: var(--surface); border: 1px solid var(--rule);
+}
+.rail {
+  padding: 1.4rem 1.25rem; border-right: 1px solid var(--rule);
+  display: grid; gap: 1.1rem; align-content: start;
+}
+.rail div { display: grid; gap: 0.15rem; }
+.rail .v { font-size: 0.92rem; font-weight: 500; line-height: 1.4; }
+.stat { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; letter-spacing: -0.03em; color: var(--accent); }
+.stat small { font-size: 1rem; font-weight: 700; margin-left: 0.15rem; }
+.entry { padding: 1.4rem 1.5rem 1.6rem; display: grid; gap: 1rem; min-width: 0; }
+.entry h3 { font-size: 1.65rem; font-weight: 700; line-height: 1.15; }
+.entry p { max-width: 62ch; }
+.entry ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; max-width: 62ch; }
+.entry li::marker { color: var(--accent); }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; padding: 0.2rem 0.5rem; border: 1px solid var(--rule); color: var(--muted); border-radius: 2px; }
+
+.shot { margin: 0; display: grid; gap: 0.5rem; max-width: 100%; }
+.steps video { aspect-ratio: 3 / 4; object-fit: cover; }
+.shot img, .shot video { display: block; width: 100%; height: auto; max-width: 100%; border: 1px solid var(--rule); background: #fff; }
+.shot a { display: block; }
+.shot figcaption { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+
+.media { display: grid; grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+@media (max-width: 760px) { .media { grid-template-columns: minmax(0, 1fr); } .media video { max-width: 22rem; } }
+
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+@media (max-width: 760px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; max-width: 40rem; }
+@media (max-width: 480px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+@media (max-width: 760px) { .duo { grid-template-columns: minmax(0, 1fr); } }
+
+/* Tap-to-enlarge */
+.shot img { cursor: zoom-in; transition: opacity 0.15s; }
+.shot img:hover { opacity: 0.9; }
+.entry > .shot { max-width: 34rem; }
+.lightbox {
+  border: 0; padding: 0; background: transparent; color: #fff;
+  max-width: min(96vw, 1400px); max-height: 94vh; width: auto;
+  overflow: visible;
+}
+.lightbox::backdrop { background: rgba(8, 12, 16, 0.88); }
+.lightbox figure { margin: 0; display: grid; gap: 0.6rem; justify-items: center; }
+.lightbox img { display: block; max-width: min(96vw, 1400px); max-height: 84vh; width: auto; height: auto; background: #fff; cursor: zoom-out; }
+.lightbox figcaption { font-family: var(--mono); font-size: 0.78rem; color: #d6dde2; text-align: center; max-width: 60ch; }
+.lb-close {
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 0.75rem); right: 0.75rem;
+  width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.5); color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) { .shot img { transition: none; } }
+
+/* Draft notes: things Parker still needs to add. Delete these blocks once filled in. */
+.todo {
+  border: 1.5px dashed var(--signal); padding: 0.75rem 0.9rem; font-size: 0.9rem; color: var(--muted);
+  background: color-mix(in srgb, var(--signal) 8%, transparent); max-width: 62ch;
+}
+.todo b { color: var(--ink); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
+.project.pending { border-style: dashed; border-color: var(--signal); background: transparent; }
+.project.pending .rail { border-right-style: dashed; border-right-color: var(--signal); }
+
+/* Experience */
+.timeline { display: grid; border-top: 1px solid var(--rule); }
+.job { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 1.5rem; padding-block: 1.1rem; border-bottom: 1px solid var(--rule); }
+.job h3 { font-family: var(--body); font-size: 1.05rem; font-weight: 600; letter-spacing: 0; }
+.job p { color: var(--muted); max-width: 60ch; }
+.when { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 0.15rem; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.skill { background: var(--surface); padding: 1.2rem 1.25rem; display: grid; gap: 0.6rem; align-content: start; }
+.skill ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.2rem; font-weight: 500; }
+
+/* Beyond */
+.beyond { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; }
+.beyond h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; }
+.beyond ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
+.beyond li { display: grid; gap: 0.05rem; }
+.beyond li span { color: var(--muted); font-size: 0.92rem; }
+
+/* Contact */
+.contact { border-top: 2px solid var(--ink); padding-top: 2rem; display: grid; gap: 1.25rem; }
+.contact h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
+.contact p { max-width: 50ch; color: var(--muted); }
+.reach { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; }
+.email { font-family: var(--mono); font-size: clamp(0.95rem, 2.5vw, 1.15rem); user-select: all; overflow-wrap: anywhere; }
+footer { padding-block: 2rem 2.5rem; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .project, .job { grid-template-columns: minmax(0, 1fr); }
+  .job { gap: 0.3rem; }
+  .rail { border-right: 0; border-bottom: 1px solid var(--rule); grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); }
+  .project.pending .rail { border-bottom: 1px dashed var(--signal); }
+  .spec + .spec { padding-left: 0; border-left: 0; }
+  .spec { border-bottom: 1px solid var(--rule); padding-right: 0; }
+  .nav { gap: 0.9rem; }
+}
+@media (max-width: 420px) { .nav { display: none; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="sheet">
+    <a class="mark" href="#top">Parker Mace</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="media/Parker_Mace_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/parker-mace" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </div>
+</header>
+
+<main class="sheet" id="top">
+  <div class="hero">
+    <div class="hero-text">
+      <p class="label">Mechanical Engineering · Tufts University · Class of 2028</p>
+      <h1>Parker <span>Mace</span></h1>
+      <p class="lede">I'm a mechanical engineering student at Tufts with a minor in Music Engineering. I do my best work on hands-on team projects, and mine span assistive design, manufacturing, and educational design: a treat dispenser for a wheelchair user's service dog, an aluminum crusader helmet, and a 17-foot wind tunnel I led a team to build.</p>
+      <div class="actions">
+        <a class="btn" href="#projects">View projects</a>
+        <button class="btn ghost" type="button" id="copy-top">Copy email</button>
+        <a class="btn ghost" href="media/Parker_Mace_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs">
+    <div class="spec"><span class="label">Degree</span><span class="v">B.S. Mechanical Engineering</span></div>
+    <div class="spec"><span class="label">Minor</span><span class="v">Music Engineering</span></div>
+    <div class="spec"><span class="label">Graduation</span><span class="v">Expected 2028</span></div>
+    <div class="spec"><span class="label">Standing</span><span class="v">Dean's List, every semester</span></div>
+    <div class="spec"><span class="label">Based in</span><span class="v">Newton, MA</span></div>
+  </div>
+
+  <section id="projects">
+    <div class="sec-head">
+      <h2>Projects</h2>
+      <span class="label">Design · Build · Test</span>
+    </div>
+    <div class="projects">
+
+      <article class="project">
+        <div class="rail">
+          <div><span class="label">Type</span><span class="v">Assistive design</span></div>
+          <div><span class="label">Client</span><span class="v">A wheelchair user and his service dog</span></div>
+          <div><span class="label">My role</span><span class="v">Designed and modeled the treat magazine</span></div>
+          <div><span class="label">Date</span><span class="v">May 2026</span></div>
+        </div>
+        <div class="entry">
+          <h3>Service Dog Treat Dispenser</h3>
+          <p>Our team built a treat dispenser for a real client: a man who uses a wheelchair and works with a service dog. The goal was to let him reward his dog on his own from his chair. I designed the treat magazine, the part that stores the treats and feeds them to the dispensing end.</p>
+          <ul>
+            <li>Designed the magazine as a long, clear acrylic channel built from tab-and-slot side, top, and bottom panels, so the treat level is visible at a glance.</li>
+            <li>Designed a rubber-band gate at the outlet: two bands stretched across acrylic brackets hold the stack of treats in place, then flex to let one treat through when it's pushed out. That makes getting a treat out easy for him from his chair, with no latch or door to work. A 3D-printed PLA cap closes the other end.</li>
+            <li>Modeled every part in CAD and made the assembly drawing and bill of materials.</li>
+          </ul>
+          <figure class="shot">
+            <img src="media/dogtreat-magazine.png" alt="Assembly drawing of the dog treat magazine: an assembled view, an exploded view of the acrylic panels, rubber band brackets, rubber bands and PLA cap, and a six-item bill of materials" width="2400" height="1855" loading="lazy">
+            <figcaption>Treat magazine assembly drawing, with an exploded view and a six-item bill of materials. Drafted by Parker Mace, rev 1.</figcaption>
+          </figure>
+          <div class="tags"><span class="tag">Assistive technology</span><span class="tag">Laser-cut acrylic</span><span class="tag">3D printing</span><span class="tag">CAD assembly</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="rail">
+          <div><span class="label">Type</span><span class="v">Mechanism design</span></div>
+          <div><span class="label">My role</span><span class="v">Mechanism, drivetrain &amp; die loading</span></div>
+          <div><span class="label">Partner</span><span class="v">Rafael Bellucco</span></div>
+          <div><span class="label">Date</span><span class="v">March 2026</span></div>
+          <div><span class="label">Context</span><span class="v">Tufts University</span></div>
+        </div>
+        <div class="entry">
+          <h3>Cam-Driven Embosser</h3>
+          <p>The assignment was to take a mechanism that converts rotary motion into linear motion and build a working device around it. My partner and I built a motorized embosser. My part was the mechanism: the drivetrain, the cam press, and how the dies load into and out of the machine.</p>
+          <ul>
+            <li>Designed a 3:1 gear reduction with laser-cut gears to drive the cam.</li>
+            <li>Designed the cam and the guided die holder it lifts, which presses the die up into its negative in the top case.</li>
+            <li>Designed a layered top case so the dies swap in and out without taking the machine apart, with magnets holding them in place.</li>
+            <li>Modeled the full assembly in CAD and checked the final assembly drawing.</li>
+          </ul>
+          <div class="media">
+            <figure class="shot">
+              <video controls muted playsinline preload="metadata" poster="media/embosser-still.jpg" width="540" height="960">
+                <source src="media/embosser.mp4" type="video/mp4">
+              </video>
+              <figcaption>Test run: loading the dies and embossing foil.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="media/embosser-drawing.png" alt="Exploded assembly drawing of the embosser with an 18-item bill of materials, showing the motor, gear train, cam, die holder, and layered top case" width="2400" height="1697" loading="lazy">
+              <figcaption>Exploded assembly drawing with bill of materials, 18 items. Rev 1, 12 March 2026.</figcaption>
+            </figure>
+          </div>
+          <div class="tags"><span class="tag">Cam mechanism</span><span class="tag">3:1 gear reduction</span><span class="tag">CAD assembly</span><span class="tag">Engineering drawing</span></div>
+          
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="rail">
+          <div><span class="label">Type</span><span class="v">Sheet metal fabrication</span></div>
+          <div><span class="label">My role</span><span class="v">Lead on CAD, plus fabrication</span></div>
+          <div><span class="label">Date</span><span class="v">November 2025</span></div>
+          <div><span class="label">Material</span><span class="v">Aluminum sheet</span></div>
+          <div><span class="label">Team</span><span class="v">Five-person group: Aidan Moclair, Noah Baker, Parker Mace, Abigail Stone, Ryan Manson</span></div>
+          <div><span class="label">Context</span><span class="v">ME 10, Tufts University</span></div>
+        </div>
+        <div class="entry">
+          <h3>Crusader Helmet</h3>
+          <p>Our group was asked to use the manufacturing processes from class to build something of our choosing. We built a crusader-style helmet from aluminum sheet, working from a published paper pattern and turning it into waterjet-ready CAD. I did most of the CAD and helped manufacture the panels.</p>
+          <ul>
+            <li>Built paper and cardboard prototypes from a printed pattern to check the shape before cutting metal.</li>
+            <li>Redrew the pattern by hand in SolidWorks and scaled it from a real head measurement.</li>
+            <li>Added rivet tabs to the CAD after a scrap-aluminum test piece showed the panels wouldn't line up without them.</li>
+            <li>Cut the panels on the waterjet, formed the back on a table bender, and drilled mating panels together to keep the rivet holes aligned.</li>
+          </ul>
+          <div class="steps">
+            <figure class="shot"><img src="media/helmet-1-cardboard.jpg" alt="Cardboard prototype of the helmet on a cutting mat" width="750" height="1000" loading="lazy"><figcaption>1 · Cardboard prototype</figcaption></figure>
+            <figure class="shot"><img src="media/helmet-2-test-piece.jpg" alt="Small riveted aluminum test version of the helmet held in one hand" width="750" height="1000" loading="lazy"><figcaption>2 · Aluminum test piece</figcaption></figure>
+            <figure class="shot"><img src="media/helmet-3-panels.jpg" alt="Waterjet-cut aluminum helmet panels spread on a workbench" width="750" height="1000" loading="lazy"><figcaption>3 · Waterjet-cut panels</figcaption></figure>
+            <figure class="shot"><img src="media/helmet-4-finished-snow.jpg" alt="Finished riveted aluminum crusader helmet with copper cross trim and breathing holes, worn by someone lying in the snow" width="750" height="1000" loading="lazy"><figcaption>4 · Finished helmet</figcaption></figure>
+          </div>
+          <div class="tags"><span class="tag">SolidWorks</span><span class="tag">Waterjet</span><span class="tag">Shearing</span><span class="tag">Bending</span><span class="tag">Riveting</span><span class="tag">Prototyping</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="rail">
+          <div><span class="label">Type</span><span class="v">Structural analysis &amp; testing</span></div>
+          <div><span class="label">Team</span><span class="v">Partner project</span></div>
+          <div><span class="label">Course</span><span class="v">ME 20, Mechanics I</span></div>
+          <div><span class="label">Date</span><span class="v">October 2025</span></div>
+        </div>
+        <div class="entry">
+          <h3>Truss Analysis &amp; Load Test</h3>
+          <p>My partner and I designed and built a Warren truss, predicted how it would carry load, and then tested those predictions on the physical truss.</p>
+          <ul>
+            <li>Calculated support reactions and member forces by hand for a center load and an off-center load.</li>
+            <li>Modeled the 7-joint, 11-member truss in analysis software to check the hand calculations and find joint displacements.</li>
+            <li>Found how moving the load shifts the reactions, from an even split at center to roughly 5:1 when the load is off-center.</li>
+            <li>Built the physical truss and loaded it to compare real behavior against the calculations.</li>
+          </ul>
+          <div class="duo">
+            <figure class="shot"><img src="media/truss-center-load.jpg" alt="Truss analysis results for a center load: member forces colored red for compression and blue for tension, with tables of member forces, reaction forces, and displacements" width="1345" height="844" loading="lazy"><figcaption>Center load: reactions split evenly. Red members are in compression, blue in tension.</figcaption></figure>
+            <figure class="shot"><img src="media/truss-offcenter-load.jpg" alt="Truss analysis results for an off-center load, showing the reactions shifting toward the loaded side" width="1363" height="864" loading="lazy"><figcaption>Off-center load: the right support carries about five times the left.</figcaption></figure>
+          </div>
+          <div class="tags"><span class="tag">Statics</span><span class="tag">Method of joints</span><span class="tag">Hand calculations</span><span class="tag">Physical testing</span></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="rail">
+          <div><span class="stat">17<small>ft</small></span><span class="label">Overall length</span></div>
+          <div><span class="label">Test section</span><span class="v">1 ft × 1 ft</span></div>
+          <div><span class="label">CAD</span><span class="v">Onshape</span></div>
+          <div><span class="label">Role</span><span class="v">Team Lead</span></div>
+          <div><span class="label">Dates</span><span class="v">Sep 2023 – May 2024</span></div>
+          <div><span class="label">Context</span><span class="v">Newton North High School engineering program</span></div>
+        </div>
+        <div class="entry">
+          <h3>Wind Tunnel Design &amp; Build</h3>
+          <p>I led a team that designed and built a working 17-foot wind tunnel over one school year, from the first layout sketches through fabrication and a running tunnel.</p>
+          <ul>
+            <li>Led the airflow optimization work, including a flow straightener made from a bundle of paper tubes, achieving laminar flow through the test section.</li>
+            <li>Designed the whole tunnel to be easily disassembled into its separate sections.</li>
+            <li>Planned and coordinated fabrication across the team, and we finished on schedule.</li>
+            <li>Ran smoke flow-visualization tests on a sphere mounted in the test section, viewed through the clear acrylic side panel.</li>
+          </ul>
+          <div class="steps">
+            <figure class="shot"><img src="media/wt-1-forms.jpg" alt="Curved contraction wall panels resting on plywood profile ribs in a classroom" width="750" height="1000" loading="lazy"><figcaption>1 · Contraction walls on their profile ribs, Feb 2024</figcaption></figure>
+            <figure class="shot"><img src="media/wt-2-contraction.jpg" alt="The finished contraction standing on end outdoors, showing its curved side profile" width="750" height="1000" loading="lazy"><figcaption>2 · Contraction built, standing on end</figcaption></figure>
+            <figure class="shot"><img src="media/wt-3-assembly.jpg" alt="Wind tunnel sections joined in the shop: contraction, test section with clear access window, and diffuser" width="750" height="1000" loading="lazy"><figcaption>3 · Sections joined in the shop</figcaption></figure>
+            <figure class="shot"><video controls muted playsinline loop preload="metadata" poster="media/wind-tunnel-smoke.jpg" width="360" height="640"><source src="media/wind-tunnel-smoke.mp4" type="video/mp4"></video><figcaption>4 · Smoke test on a sphere in the test section</figcaption></figure>
+          </div>
+          <div class="tags"><span class="tag">Onshape</span><span class="tag">Aerodynamics</span><span class="tag">Flow straightening</span><span class="tag">Fabrication</span><span class="tag">Team leadership</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <h2>Hands-on Experience</h2>
+      <span class="label">Repair · Maintenance · Training</span>
+    </div>
+    <div class="timeline">
+      <div class="job">
+        <span class="when">Summer 2025</span>
+        <div><h3>Lifeguard · University Club</h3><p>Kept the pool safe and taught swim lessons.</p></div>
+      </div>
+      <div class="job">
+        <span class="when">Summer 2024</span>
+        <div><h3>Sales &amp; Repair Technician · Landry's Bicycles</h3><p>Repaired customer bikes and trained new employees.</p></div>
+      </div>
+      <div class="job">
+        <span class="when">2019 – 2024</span>
+        <div><h3>Equipment &amp; Grounds Volunteer · Community Rowing Inc.</h3><p>Repaired rowing shells and equipment and helped maintain the boathouse facilities.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <h2>Skills</h2>
+    </div>
+    <div class="skills">
+      <div class="skill"><span class="label">CAD</span><ul><li>SolidWorks</li><li>Onshape</li><li>Fusion 360</li></ul></div>
+      <div class="skill"><span class="label">Simulation</span><ul><li>COMSOL Multiphysics (CFD)</li></ul></div>
+      <div class="skill"><span class="label">Programming</span><ul><li>MATLAB</li><li>Python</li><li>C#</li></ul></div>
+      <div class="skill"><span class="label">Manufacturing</span><ul><li>Manual mill</li><li>Lathe</li><li>CNC</li><li>Waterjet</li><li>Laser cutter</li></ul></div>
+      <div class="skill"><span class="label">Leadership</span><ul><li>Team leadership</li><li>Project coordination</li><li>Training &amp; mentorship</li></ul></div>
+    </div>
+  </section>
+
+  <section id="beyond">
+    <div class="sec-head">
+      <h2>Outside the Shop</h2>
+    </div>
+    <div class="beyond">
+      <div>
+        <h3>Rowing</h3>
+        <ul>
+          <li>Varsity Rower, Tufts Men's Crew<span>2024 – present</span></li>
+          <li>Rower &amp; Captain, Community Rowing Inc.<span>2018 – 2024</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Leadership</h3>
+        <ul>
+          <li>Co-Founder &amp; Co-President, Rocketry Team<span>Founded and led a 10-member team in the American Rocketry Challenge (TARC)</span></li>
+          <li>Team Lead, Wind Tunnel Project<span>Newton North High School, 2023 – 2024</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Recognition</h3>
+        <ul>
+          <li>Engineer of the Year<span>Newton North High School, 2024</span></li>
+          <li>Engineering Certificate<span>Newton North High School, 2024</span></li>
+          <li>National Merit Commended Scholar<span>2023</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <span class="label">Contact</span>
+    <h2>Looking for a summer 2027 internship.</h2>
+    <p>I'm interested in roles in mechanical design, testing, and manufacturing. Email is the fastest way to reach me.</p>
+    <div class="reach">
+      <span class="email" id="email">parkerjmace24@gmail.com</span>
+      <button class="btn" type="button" id="copy-bottom">Copy email</button>
+      <a class="btn ghost" href="https://www.linkedin.com/in/parker-mace" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="media/Parker_Mace_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+    </div>
+  </section>
+</main>
+
+<footer class="sheet">
+  <span>Parker Mace · Tufts University</span>
+  <span>Updated October 2026</span>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
+  <button class="lb-close" type="button" id="lb-close" aria-label="Close">×</button>
+  <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+</dialog>
+
+<script>
+(function () {
+  // Copy email buttons
+  function copyEmail(btn) {
+    var text = document.getElementById('email').textContent.trim();
+    var orig = btn.textContent;
+    function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = orig; }, 1600); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      done('Selected');
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { done('Copied'); }, fallback);
+    } catch (e) { fallback(); }
+  }
+  ['copy-top', 'copy-bottom'].forEach(function (id) {
+    var b = document.getElementById(id);
+    b.addEventListener('click', function () { copyEmail(b); });
+  });
+  // Tap-to-enlarge for project images
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lb-img');
+  var lbCap = document.getElementById('lb-cap');
+  function openLb(img) {
+    var cap = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt;
+    lbCap.textContent = cap ? cap.textContent : '';
+    if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
+  }
+  function closeLb() { if (lb.close) lb.close(); else lb.removeAttribute('open'); }
+  document.querySelectorAll('.projects .shot img').forEach(function (img) {
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', 'Enlarge: ' + img.alt);
+    img.addEventListener('click', function () { openLb(img); });
+    img.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(img); }
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click', closeLb);
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target === lbImg) closeLb(); });
+})();
+</script>
+</body>
+</html>
