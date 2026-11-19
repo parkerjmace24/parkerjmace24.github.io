@@ -137,6 +137,7 @@ section { padding-bottom: clamp(3rem, 8vw, 5.5rem); scroll-margin-top: 4rem; }
 
 .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
 @media (max-width: 760px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; max-width: 34rem; }
 
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; max-width: 40rem; }
 @media (max-width: 480px) { .pair { grid-template-columns: minmax(0, 1fr); } }
@@ -256,6 +257,42 @@ footer { padding-block: 2rem 2.5rem; font-family: var(--mono); font-size: 0.72re
       <span class="label">Design · Build · Test</span>
     </div>
     <div class="projects">
+
+      <article class="project">
+        <div class="rail">
+          <div><span class="label">Type</span><span class="v">Electromechanical game</span></div>
+          <div><span class="label">My role</span><span class="v">Solo: design, fabrication, electronics &amp; code</span></div>
+          <div><span class="label">Course</span><span class="v">ME 30, Electronics &amp; Controls I</span></div>
+          <div><span class="label">Date</span><span class="v">November 2026</span></div>
+          <div><span class="label">Context</span><span class="v">Tufts University</span></div>
+        </div>
+        <div class="entry">
+          <h3>Flow-Lift Reaction Game</h3>
+          <p>The assignment was to invent an original electromechanical game run by a KB2040 microcontroller, with a motor driven through an H-bridge. In my game, a motor spins an impeller that pushes fluid around a closed PVC loop. In a clear tube, a slightly negatively buoyant plug rests at the bottom until the flow lifts it. Three LEDs mark low, mid and high levels on the tube, each shining at a photoresistor. One lights up at random, and the player runs the pump with a button to bring the plug up to that level and block the light before time runs out.</p>
+          <ul>
+            <li>Designed and 3D-printed the impeller, and built the closed PVC flow loop it drives.</li>
+            <li>Made the plug slightly negatively buoyant, so it sinks on its own when the pump stops and only rises with flow. That makes holding it at a level the skill of the game.</li>
+            <li>Wired the motor through an H-bridge and mounted three LED and photoresistor pairs along the tube.</li>
+            <li>Wrote the game in CircuitPython. It calibrates each sensor at startup, picks levels at random, and shortens each round from 6 to 4 seconds.</li>
+            <li>Traced a dead LED channel to two GPIO pins shorted to ground, confirmed it with a multimeter and pin tests, and moved the LED to a working pin.</li>
+          </ul>
+          <figure class="shot">
+            <video controls playsinline preload="metadata" poster="flow-game-still.jpg" width="960" height="540">
+              <source src="flow-game.mp4" type="video/mp4">
+            </video>
+            <figcaption>Gameplay, then a walkthrough of how it works. 3 minutes.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="flow-game-impeller.jpg" alt="CAD render of the impeller from above and below: a solid top disk with a center shaft hole, and six curved vanes underneath that sweep fluid outward" width="1342" height="674" loading="lazy">
+            <figcaption>The impeller I designed and 3D-printed, top and underside. Six curved vanes fling fluid outward to drive flow around the loop.</figcaption>
+          </figure>
+          <div class="pair">
+            <figure class="shot"><img src="flow-game-build.jpg" alt="The game on a classroom table: a white PVC loop with a motor-driven impeller at the bottom, a clear tube on a wood panel with three red LEDs along its side, and a breadboard with the KB2040 mounted on the frame" width="750" height="1000" loading="lazy"><figcaption>The finished game on demo day.</figcaption></figure>
+            <figure class="shot"><img src="flow-game-electronics.jpg" alt="Close-up of the breadboard: KB2040 microcontroller, resistors for the photoresistor circuits, an H-bridge board driving the motor, and a push button" width="750" height="1000" loading="lazy"><figcaption>Electronics: KB2040, sensor circuits, H-bridge and button.</figcaption></figure>
+          </div>
+          <div class="tags"><span class="tag">CircuitPython</span><span class="tag">KB2040</span><span class="tag">H-bridge motor control</span><span class="tag">Light sensing</span><span class="tag">Fluid flow</span><span class="tag">3D printing</span></div>
+        </div>
+      </article>
 
       <article class="project">
         <div class="rail">
@@ -426,7 +463,8 @@ footer { padding-block: 2rem 2.5rem; font-family: var(--mono); font-size: 0.72re
       <div class="skill"><span class="label">CAD</span><ul><li>SolidWorks</li><li>Onshape</li><li>Fusion 360</li></ul></div>
       <div class="skill"><span class="label">Simulation</span><ul><li>COMSOL Multiphysics (CFD)</li></ul></div>
       <div class="skill"><span class="label">Programming</span><ul><li>MATLAB</li><li>Python</li><li>C#</li></ul></div>
-      <div class="skill"><span class="label">Manufacturing</span><ul><li>Manual mill</li><li>Lathe</li><li>CNC</li><li>Waterjet</li><li>Laser cutter</li></ul></div>
+      <div class="skill"><span class="label">Electronics</span><ul><li>CircuitPython (KB2040)</li><li>H-bridge motor control</li><li>Sensor circuits</li></ul></div>
+      <div class="skill"><span class="label">Manufacturing</span><ul><li>Manual mill</li><li>Lathe</li><li>CNC</li><li>Waterjet</li><li>Laser cutter</li><li>3D printing</li></ul></div>
       <div class="skill"><span class="label">Leadership</span><ul><li>Team leadership</li><li>Project coordination</li><li>Training &amp; mentorship</li></ul></div>
     </div>
   </section>
@@ -476,7 +514,7 @@ footer { padding-block: 2rem 2.5rem; font-family: var(--mono); font-size: 0.72re
 
 <footer class="sheet">
   <span>Parker Mace · Tufts University</span>
-  <span>Updated October 2026</span>
+  <span>Updated November 2026</span>
 </footer>
 
 <dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
