@@ -268,13 +268,11 @@ footer { padding-block: 2rem 2.5rem; font-family: var(--mono); font-size: 0.72re
         </div>
         <div class="entry">
           <h3>Flow-Lift Reaction Game</h3>
-          <p>The assignment was to invent an original electromechanical game run by a KB2040 microcontroller, with a motor driven through an H-bridge. In my game, a motor spins an impeller that pushes fluid around a closed PVC loop. In a clear tube, a slightly negatively buoyant plug rests at the bottom until the flow lifts it. Three LEDs mark low, mid and high levels on the tube, each shining at a photoresistor. One lights up at random, and the player runs the pump with a button to bring the plug up to that level and block the light before time runs out.</p>
+          <p>An original game for ME 30, run by a KB2040 microcontroller. A motor spins an impeller that pumps fluid around a closed PVC loop and lifts a plug up a clear tube. One of three LEDs lights at random, and the player runs the pump with a button to raise the plug and block that LED's light sensor before time runs out.</p>
           <ul>
-            <li>Designed and 3D-printed the impeller, and built the closed PVC flow loop it drives.</li>
-            <li>Made the plug slightly negatively buoyant, so it sinks on its own when the pump stops and only rises with flow. That makes holding it at a level the skill of the game.</li>
-            <li>Wired the motor through an H-bridge and mounted three LED and photoresistor pairs along the tube.</li>
-            <li>Wrote the game in CircuitPython. It calibrates each sensor at startup, picks levels at random, and shortens each round from 6 to 4 seconds.</li>
-            <li>Traced a dead LED channel to two GPIO pins shorted to ground, confirmed it with a multimeter and pin tests, and moved the LED to a working pin.</li>
+            <li>Designed and 3D-printed the impeller, refining it over several versions.</li>
+            <li>Made a waterproof bushing so the motor shaft can drive the impeller without leaking.</li>
+            <li>Wired the motor through an H-bridge and wrote the game in CircuitPython.</li>
           </ul>
           <figure class="shot">
             <video controls playsinline preload="metadata" poster="flow-game-still.jpg" width="960" height="540">
@@ -284,7 +282,7 @@ footer { padding-block: 2rem 2.5rem; font-family: var(--mono); font-size: 0.72re
           </figure>
           <figure class="shot">
             <img src="flow-game-impeller.jpg" alt="CAD render of the impeller from above and below: a solid top disk with a center shaft hole, and six curved vanes underneath that sweep fluid outward" width="1342" height="674" loading="lazy">
-            <figcaption>The impeller I designed and 3D-printed, top and underside. Six curved vanes fling fluid outward to drive flow around the loop.</figcaption>
+            <figcaption>The impeller, top and underside.</figcaption>
           </figure>
           <div class="pair">
             <figure class="shot"><img src="flow-game-build.jpg" alt="The game on a classroom table: a white PVC loop with a motor-driven impeller at the bottom, a clear tube on a wood panel with three red LEDs along its side, and a breadboard with the KB2040 mounted on the frame" width="750" height="1000" loading="lazy"><figcaption>The finished game on demo day.</figcaption></figure>
